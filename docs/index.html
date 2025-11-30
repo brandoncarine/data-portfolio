@@ -4,12 +4,16 @@
   <meta charset="utf-8" />
   <title>Brandon Carine · Data Analytics Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script>
+    // Mark when JS is available so animations don't hide content if JS is off
+    document.documentElement.classList.add('js');
+  </script>
   <style>
     :root {
-      --navy: #123652;      /* dark blue from logo (approx) */
-      --blue: #2d587a;      /* lighter blue */
-      --orange: #f97316;    /* accent orange */
-      --bg: #f5f7fb;
+      --navy: #214563;      /* extracted from logo */
+      --blue: #2d587a;      /* lighter blue from logo family */
+      --orange: #f1884d;    /* accent orange from logo */
+      --bg: #f5f5f3;
       --text-main: #0f172a;
       --text-muted: #6b7280;
       --card-border: #e5e7eb;
@@ -59,15 +63,18 @@
 
     .hero-main h1 {
       margin: 0 0 .4rem;
-      font-size: clamp(2rem, 3vw, 2.5rem);
-      letter-spacing: -0.03em;
+      font-size: clamp(2.1rem, 3.1vw, 2.7rem);
+      letter-spacing: -0.035em;
       color: var(--navy);
+      font-weight: 720;
     }
 
     .hero-subtitle {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       color: var(--text-muted);
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.65rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     .hero-tagline {
@@ -193,6 +200,43 @@
       border-color: #e5e7eb;
     }
 
+    /* About */
+    .about {
+      margin-top: 2.6rem;
+      padding: 1.4rem 1.5rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.9);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.05);
+      font-size: .95rem;
+      color: #374151;
+    }
+
+    .about h2 {
+      margin: 0 0 .4rem;
+      font-size: 1.15rem;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+      position: relative;
+      display: inline-block;
+      padding-bottom: .25rem;
+    }
+
+    .about h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 38%;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+    }
+
+    .about p {
+      margin: 0.3rem 0 0;
+    }
+
     /* Projects */
     .section-header {
       margin-top: 3rem;
@@ -208,6 +252,19 @@
       font-size: 1.5rem;
       letter-spacing: -0.02em;
       color: var(--navy);
+      position: relative;
+      padding-bottom: .25rem;
+    }
+
+    .section-header h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 64px;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--orange), transparent);
     }
 
     .section-header p {
@@ -233,7 +290,7 @@
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: linear-gradient(135deg, rgba(18,54,82,0.16), rgba(249,115,22,0.12));
+      background: linear-gradient(135deg, rgba(33,69,99,0.16), rgba(241,136,77,0.12));
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s ease;
@@ -322,6 +379,21 @@
       margin: 0.1rem 0;
     }
 
+    /* Scroll reveal animation */
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .js .reveal {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .js .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* Responsive */
     @media (max-width: 800px) {
       .hero {
@@ -355,19 +427,22 @@
   <div class="page-wrap">
 
     <!-- HERO -->
-    <section class="hero">
+    <section class="hero reveal">
       <div class="hero-main">
         <h1>Brandon Carine</h1>
-        <div class="hero-subtitle">Data Analyst & Business Intelligence Developer</div>
+        <div class="hero-subtitle">Data Analytics & Business Intelligence</div>
         <p class="hero-tagline">
           Turning messy, real-world data into clear stories using Excel, R, and Power BI —
           with a focus on practical insights, clean visuals, and explainable decisions.
         </p>
         <div class="hero-meta">
-          Based in Calgary, AB · SAIT Data Analytics
+          Based in Calgary, AB · SAIT Data Analytics (4.0 GPA)
         </div>
         <div class="hero-links">
           <a class="btn btn-primary" href="#projects">View projects</a>
+          <a class="btn" href="assets/brandon-carine-resume.pdf" target="_blank" rel="noopener">
+            Download resume
+          </a>
           <a class="btn" href="https://www.linkedin.com/in/brandon-carine/" target="_blank" rel="noopener">LinkedIn</a>
           <a class="btn" href="https://github.com/brandoncarine" target="_blank" rel="noopener">GitHub</a>
         </div>
@@ -375,14 +450,13 @@
 
       <div class="hero-logo-wrap">
         <div class="hero-logo">
-          <!-- Using favicon as logo image; replace src if you upload a dedicated logo file -->
-          <img src="favicon.png" alt="BC Data logo">
+          <img src="favicon.png" alt="BC data logo">
         </div>
       </div>
     </section>
 
     <!-- SKILLS -->
-    <section class="skills" aria-label="Skills overview">
+    <section class="skills reveal" aria-label="Skills overview">
       <div class="skill-card">
         <div class="skill-title">Analytics & Statistics</div>
         <div class="skill-tags">
@@ -412,15 +486,26 @@
       </div>
     </section>
 
+    <!-- ABOUT -->
+    <section class="about reveal" id="about">
+      <h2>About me</h2>
+      <p>
+        I’m a data analyst focused on building clean, reliable analytics solutions that help teams make clearer
+        decisions. I enjoy BI development, data modeling, and turning messy datasets into simple visuals that anyone
+        can understand. I’m especially interested in roles combining business intelligence, analytics, and data
+        storytelling.
+      </p>
+    </section>
+
     <!-- PROJECTS -->
-    <section id="projects" aria-label="Project portfolio">
+    <section id="projects" aria-label="Project portfolio" class="reveal">
       <div class="section-header">
-        <h2>Selected Projects</h2>
+        <h2>Selected projects</h2>
         <p>End-to-end work in Excel, R, and Power BI.</p>
       </div>
 
       <!-- Bike Sharing – Seoul -->
-      <article class="card">
+      <article class="card reveal">
         <div class="card-inner">
           <h2>
             Bike Sharing – Seoul (Excel)
@@ -442,7 +527,7 @@
       </article>
 
       <!-- Twin Cities Traffic – Minneapolis–St. Paul -->
-      <article class="card">
+      <article class="card reveal">
         <div class="card-inner">
           <h2>
             Twin Cities Traffic – Minneapolis–St. Paul (R/Quarto HTML)
@@ -464,7 +549,7 @@
       </article>
 
       <!-- UNESCO World Heritage Sites – Power BI Report -->
-      <article class="card">
+      <article class="card reveal">
         <div class="card-inner">
           <h2>
             UNESCO World Heritage Sites (Power BI)
@@ -485,11 +570,35 @@
     </section>
 
     <!-- FOOTER -->
-    <footer>
+    <footer class="reveal">
       <p><a href="https://github.com/brandoncarine/data-portfolio">View source on GitHub</a></p>
       <p>© 2025 · Designed and built by Brandon Carine. All project branding created with the assistance of ChatGPT.</p>
     </footer>
 
   </div>
+
+  <script>
+    // Simple IntersectionObserver for scroll fade-in
+    (function () {
+      if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach(function (el) {
+          el.classList.add('visible');
+        });
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    })();
+  </script>
 </body>
 </html>
+
