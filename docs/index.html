@@ -2,120 +2,494 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Data Analytics Portfolio – Brandon Carine</title>
+  <title>Brandon Carine · Data Analytics Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root {
+      --navy: #123652;      /* dark blue from logo (approx) */
+      --blue: #2d587a;      /* lighter blue */
+      --orange: #f97316;    /* accent orange */
+      --bg: #f5f7fb;
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --card-border: #e5e7eb;
+      --card-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      max-width: 880px;
-      margin: 2rem auto;
+      margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       line-height: 1.6;
-      padding: 0 1rem;
+      color: var(--text-main);
+      background: radial-gradient(circle at top, #ffffff 0, var(--bg) 55%, #e5e9f2 100%);
     }
-    h1 { margin-bottom: .25rem; }
+
+    a {
+      text-decoration: none;
+      color: var(--blue);
+      transition: color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    a:hover {
+      color: var(--orange);
+    }
+
+    .page-wrap {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+
+    /* Hero */
+    .hero {
+      margin-top: 1.5rem;
+      padding: 1.75rem 1.75rem 2rem;
+      border-radius: 24px;
+      background: radial-gradient(circle at top left, #ffffff 0, #f3f6fb 38%, #e3edf7 100%);
+      border: 1px solid rgba(15, 23, 42, 0.05);
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1.1fr);
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .hero-main h1 {
+      margin: 0 0 .4rem;
+      font-size: clamp(2rem, 3vw, 2.5rem);
+      letter-spacing: -0.03em;
+      color: var(--navy);
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-tagline {
+      font-size: .98rem;
+      color: #4b5563;
+      max-width: 34rem;
+    }
+
+    .hero-meta {
+      margin-top: 0.85rem;
+      font-size: .92rem;
+      color: var(--text-muted);
+    }
+
+    .hero-links {
+      margin-top: 1.1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+
+    .hero-links a.btn {
+      padding: 0.5rem 0.9rem;
+      border-radius: 999px;
+      font-size: .9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      background: #ffffff;
+      color: var(--navy);
+    }
+    .hero-links a.btn-primary {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.25);
+    }
+    .hero-links a.btn-primary:hover {
+      background: linear-gradient(135deg, var(--navy), var(--navy));
+      color: #ffffff;
+    }
+    .hero-links a.btn:hover {
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.15);
+      border-color: rgba(148, 163, 184, 0.9);
+    }
+
+    .hero-logo-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-logo {
+      max-width: 220px;
+      width: 100%;
+      border-radius: 24px;
+      padding: 1.1rem 1.2rem;
+      background:
+        linear-gradient(135deg, rgba(18,54,82,0.07), rgba(45,88,122,0.02)),
+        #ffffff;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 18px 38px rgba(15, 23, 42, 0.14);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero-logo img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Skills strip */
+    .skills {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-card {
+      padding: 0.9rem 1rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.85);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.04);
+    }
+
+    .skill-title {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: .35rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .25rem .4rem;
+      font-size: .78rem;
+    }
+
+    .skill-tag {
+      padding: 0.1rem 0.45rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 1px solid #dbeafe;
+      white-space: nowrap;
+    }
+
+    .skill-tag.orange {
+      background: #fff7ed;
+      color: #ea580c;
+      border-color: #fed7aa;
+    }
+
+    .skill-tag.muted {
+      background: #f3f4f6;
+      color: #4b5563;
+      border-color: #e5e7eb;
+    }
+
+    /* Projects */
+    .section-header {
+      margin-top: 3rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .section-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      color: var(--navy);
+    }
+
+    .section-header p {
+      margin: 0;
+      font-size: .9rem;
+      color: var(--text-muted);
+    }
+
     .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 12px;
-      padding: 1rem 1.25rem;
-      margin: 1rem 0;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 1.15rem 1.3rem 1.2rem;
+      margin: 1.1rem 0;
+      background: var(--card-bg);
+      box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(18,54,82,0.16), rgba(249,115,22,0.12));
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
     .card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.14);
+      border-color: rgba(148, 163, 184, 0.9);
     }
+
+    .card:hover::before {
+      opacity: 0.08;
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      color: var(--navy);
+    }
+
+    .card h2 img {
+      height: 30px;
+      border-radius: 7px;
+    }
+
     .card-thumb {
       width: 100%;
-      border-radius: 8px;
-      margin: 0.5rem 0 0.75rem;
+      border-radius: 10px;
+      margin: 0.6rem 0 0.85rem;
       display: block;
-      height: 300px;
+      height: 260px;
       object-fit: contain;
       background-color: #f9fafb;
     }
-    a {
-      text-decoration: none;
-      color: #2563eb;
-      transition: color 0.2s ease;
+
+    .card p {
+      margin: 0 0 .45rem;
+      font-size: .93rem;
+      color: #374151;
     }
-    a:hover {
-      color: #fb923c; /* soft orange hover */
-      text-decoration: underline;
+
+    .card p small {
+      color: var(--text-muted);
+      font-size: .82rem;
     }
-    .muted { color: #6b7280; font-size: .95rem; }
+
+    .card-links {
+      margin-top: 0.4rem;
+      font-size: .88rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+    }
+
+    .card-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: .25rem;
+      padding-bottom: 1px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .card-links a:hover {
+      border-bottom-color: var(--orange);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 3rem;
+      padding-top: 1rem;
+      border-top: 1px solid #e5e7eb;
+      font-size: .8rem;
+      color: var(--text-muted);
+    }
+
+    footer p {
+      margin: 0.1rem 0;
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 1.4rem 1.25rem 1.6rem;
+      }
+      .hero-logo-wrap {
+        justify-content: flex-start;
+      }
+      .hero-logo {
+        max-width: 180px;
+      }
+
+      .skills {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .page-wrap {
+        padding-inline: 1rem;
+      }
+      .card-thumb {
+        height: 220px;
+      }
+    }
   </style>
   <link rel="icon" type="image/png" href="favicon.png">
 </head>
 <body>
-  <h1>Brandon Carine</h1>
-  <p class="muted">
-    Data Analytics Student · SAIT · Calgary, AB<br>
-    <a href="https://www.linkedin.com/in/brandon-carine/">LinkedIn</a> ·
-    <a href="https://github.com/brandoncarine">GitHub</a>
-  </p>
+  <div class="page-wrap">
 
-  <h2 style="margin-top:2rem;">Data Analytics Portfolio</h2>
-  <p>
-    A selection of end-to-end data projects completed in Excel and R, showcasing data cleaning,
-    visualization, and insights communication.
-  </p>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-main">
+        <h1>Brandon Carine</h1>
+        <div class="hero-subtitle">Data Analyst & Business Intelligence Developer</div>
+        <p class="hero-tagline">
+          Turning messy, real-world data into clear stories using Excel, R, and Power BI —
+          with a focus on practical insights, clean visuals, and explainable decisions.
+        </p>
+        <div class="hero-meta">
+          Based in Calgary, AB · SAIT Data Analytics
+        </div>
+        <div class="hero-links">
+          <a class="btn btn-primary" href="#projects">View projects</a>
+          <a class="btn" href="https://www.linkedin.com/in/brandon-carine/" target="_blank" rel="noopener">LinkedIn</a>
+          <a class="btn" href="https://github.com/brandoncarine" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
 
-  <!-- Bike Sharing – Seoul -->
-  <div class="card">
-    <h2 style="display:flex; align-items:center; gap:.5rem;">
-      Bike Sharing – Seoul (Excel)
-      <img src="./bike-sharing-seoul/seoul-ride-logo.png" alt="SeoulRide (fictional) logo" style="height:32px; border-radius:6px;">
-    </h2>
-    <img src="./bike-sharing-seoul/seoul-thumb.png"
-         alt="Excel chart: Rented Bike Count forecasting in Seoul"
-         class="card-thumb">
-    <p>
-      End-to-end Excel analysis of Seoul’s bike-sharing demand, applying data cleaning, multiple linear regression,
-      K-Means clustering, and time-series forecasting to predict rental trends and support business decisions.
-    </p>
-    <p><a href="./bike-sharing-seoul/bike-sharing-seoul.xlsx">Download the Excel workbook</a></p>
+      <div class="hero-logo-wrap">
+        <div class="hero-logo">
+          <!-- Using favicon as logo image; replace src if you upload a dedicated logo file -->
+          <img src="favicon.png" alt="BC Data logo">
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills" aria-label="Skills overview">
+      <div class="skill-card">
+        <div class="skill-title">Analytics & Statistics</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Descriptive analysis</span>
+          <span class="skill-tag">Regression</span>
+          <span class="skill-tag">Clustering</span>
+          <span class="skill-tag muted">Forecasting</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Business Intelligence</div>
+        <div class="skill-tags">
+          <span class="skill-tag orange">Power BI</span>
+          <span class="skill-tag orange">DAX</span>
+          <span class="skill-tag">Dashboards</span>
+          <span class="skill-tag muted">Data modeling</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-title">Tools & Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Excel</span>
+          <span class="skill-tag">R / Quarto</span>
+          <span class="skill-tag muted">SQL</span>
+          <span class="skill-tag muted">Git & GitHub</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" aria-label="Project portfolio">
+      <div class="section-header">
+        <h2>Selected Projects</h2>
+        <p>End-to-end work in Excel, R, and Power BI.</p>
+      </div>
+
+      <!-- Bike Sharing – Seoul -->
+      <article class="card">
+        <div class="card-inner">
+          <h2>
+            Bike Sharing – Seoul (Excel)
+            <img src="./bike-sharing-seoul/seoul-ride-logo.png" alt="SeoulRide logo">
+          </h2>
+          <img src="./bike-sharing-seoul/seoul-thumb.png"
+               alt="Excel chart: Rented Bike Count forecasting in Seoul"
+               class="card-thumb">
+          <p>
+            End-to-end Excel analysis of Seoul’s bike-sharing demand, applying data cleaning,
+            multiple linear regression, K-Means clustering, and time-series forecasting to
+            predict rental trends and support business decisions.
+          </p>
+          <p><small>Tools: Excel · Regression · K-Means · Forecasting</small></p>
+          <div class="card-links">
+            <a href="./bike-sharing-seoul/bike-sharing-seoul.xlsx">Download the Excel workbook →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Twin Cities Traffic – Minneapolis–St. Paul -->
+      <article class="card">
+        <div class="card-inner">
+          <h2>
+            Twin Cities Traffic – Minneapolis–St. Paul (R/Quarto HTML)
+            <img src="./twin-cities-traffic-msp/twintraffic-logo.png" alt="TwinTraffic logo">
+          </h2>
+          <img src="./twin-cities-traffic-msp/traffic-thumb.png"
+               alt="Decision Tree for Twin Cities Traffic Volume"
+               class="card-thumb">
+          <p>
+            R/Quarto analysis of Minneapolis–St. Paul traffic data, following the CRISP-DM framework
+            to perform data preparation, regression, clustering, and decision tree modeling for
+            predictive insights.
+          </p>
+          <p><small>Tools: R · Quarto · CRISP-DM · Decision trees · Clustering</small></p>
+          <div class="card-links">
+            <a href="./twin-cities-traffic-msp/">Open the live report →</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- UNESCO World Heritage Sites – Power BI Report -->
+      <article class="card">
+        <div class="card-inner">
+          <h2>
+            UNESCO World Heritage Sites (Power BI)
+          </h2>
+          <img src="./powerbi-report/powerbi-thumb.png"
+               alt="Power BI dashboard thumbnail"
+               class="card-thumb">
+          <p>
+            Interactive Power BI dashboard analyzing UNESCO World Heritage Sites globally, with
+            country-level insights, historical trends, and key metrics for stakeholders.
+          </p>
+          <p><small>Tools: Power BI · DAX · Data modeling · Mapping</small></p>
+          <div class="card-links">
+            <a href="./powerbi-report/">Open the interactive report →</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <p><a href="https://github.com/brandoncarine/data-portfolio">View source on GitHub</a></p>
+      <p>© 2025 · Designed and built by Brandon Carine. All project branding created with the assistance of ChatGPT.</p>
+    </footer>
+
   </div>
-
-  <!-- Twin Cities Traffic – Minneapolis–St. Paul -->
-  <div class="card">
-    <h2 style="display:flex; align-items:center; gap:.5rem;">
-      Twin Cities Traffic – Minneapolis–St. Paul (R/Quarto HTML)
-      <img src="./twin-cities-traffic-msp/twintraffic-logo.png" alt="TwinTraffic (fictional) logo" style="height:32px; border-radius:6px;">
-    </h2>
-    <img src="./twin-cities-traffic-msp/traffic-thumb.png"
-         alt="Decision Tree for Twin Cities Traffic Volume"
-         class="card-thumb">
-    <p>
-      R/Quarto analysis of Minneapolis–St. Paul traffic data, following the CRISP-DM framework to perform data preparation,
-      regression, clustering, and decision tree modeling for predictive insights.
-    </p>
-    <p><a href="./twin-cities-traffic-msp/">Open the live report</a></p>
-  </div>
-
-  <!-- UNESCO World Heritage Sites – Power BI Report -->
-  <div class="card">
-    <h2 style="display:flex; align-items:center; gap:.5rem;">
-      UNESCO World Heritage Sites (Power BI)
-    </h2>
-    <img src="./powerbi-report/powerbi-thumb.png"
-         alt="Power BI dashboard thumbnail"
-         class="card-thumb">
-    <p>
-      Interactive Power BI dashboard analyzing UNESCO World Heritage Sites globally, with
-      country-level insights, historical trends, and key metrics.
-    </p>
-    <p><a href="./powerbi-report/">Open the interactive report</a></p>
-  </div>
-
-  <p class="muted"><a href="https://github.com/brandoncarine/data-portfolio">View source on GitHub</a></p>
-
-  <p class="muted" style="font-size:0.85rem;">
-    Last updated: November 2025
-  </p>
-
-  <p class="muted" style="font-size:0.85rem;">
-    All logos and icons were generated with the assistance of ChatGPT for this portfolio.
-  </p>
 </body>
 </html>
-
