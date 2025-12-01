@@ -332,41 +332,46 @@
       color: var(--text-muted);
     }
 
-    .card {
+        .card {
       border: 1px solid var(--card-border);
       border-radius: 18px;
       padding: 0; /* inner content is handled by card-main-link/card-inner */
       margin: 1.1rem 0;
       background: var(--card-bg);
       box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
       position: relative;
       overflow: hidden;
     }
 
+    /* subtle inner glow that stays away from text */
     .card::before {
       content: "";
       position: absolute;
-      inset: -3px;  /* softened glow position */
+      inset: 6px; /* keeps glow off the text area */
       border-radius: inherit;
-      background: conic-gradient(from 180deg,
-        rgba(33,69,99,0.25),
-        rgba(241,136,77,0.16),
-        rgba(45,88,122,0.22),
-        rgba(33,69,99,0.25));
+      background: radial-gradient(
+        circle at top left,
+        rgba(33,69,99,0.04),
+        rgba(241,136,77,0.03)
+      );
       opacity: 0;
-      pointer-events: none;
       transition: opacity 0.25s ease;
+      pointer-events: none;
     }
 
+    /* main hover effect: lift + stronger shadow + inner glow */
     .card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.22);
-      border-color: transparent;
+      transform: translateY(-4px) scale(1.015);
+      box-shadow: 0 18px 36px rgba(15, 23, 42, 0.18);
+      border-color: rgba(148,163,184,0.4);
     }
 
     .card:hover::before {
-      opacity: 0.35; /* softened glow */
+      opacity: 1;
     }
 
     .card-main-link {
@@ -381,6 +386,12 @@
     .card-inner {
       background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(245,248,255,0.98));
       border-radius: 18px;
+      transition: background 0.25s ease;
+    }
+
+    /* soft background tint on hover */
+    .card:hover .card-inner {
+      background: rgba(250, 252, 255, 0.97);
     }
 
     .card h2 {
@@ -450,13 +461,15 @@
         transform 0.15s ease;
     }
 
+    /* stronger button animation on hover, tied to card hover */
     .card:hover .card-button {
       background: linear-gradient(135deg, var(--navy), var(--blue));
       color: #ffffff;
       border-color: transparent;
       box-shadow: 0 10px 20px rgba(15,23,42,0.25);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
     }
+
 
     /* Contact */
     .contact {
@@ -585,7 +598,7 @@
       }
     }
   </style>
-  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/png" href="favicon-no-background.png">
 </head>
 <body>
   <div class="page-wrap">
@@ -614,7 +627,7 @@
 
       <div class="hero-logo-wrap">
         <div class="hero-logo">
-          <img src="favicon.png" alt="BC data logo">
+          <img src="favicon-no-background.png" alt="BC data logo">
         </div>
       </div>
     </section>
